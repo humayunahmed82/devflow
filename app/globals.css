@@ -1,10 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 @import url("../styles/theme.css");
+
 body {
   font-family: "Inter", sans-serif;
 }
+
 @layer utilities {
   .flex-center {
     @apply flex justify-center items-center;
