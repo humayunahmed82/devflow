@@ -117,7 +117,7 @@
   .body-semibold {
     @apply text-[14px] font-semibold leading-[18.2px];
   }
-  small-regular {
+  .small-regular {
     @apply text-[12px] font-normal leading-[15.6px];
   }
   .small-medium {
@@ -133,7 +133,7 @@
     @apply text-[10px] font-normal leading-[13px];
   }
   .placeholder {
-    @apply placeholder:text-light-400 dark:placeholder:text-light-;
+    @apply placeholder:text-light-400 dark:placeholder:text-light-500;
   }
   .invert-colors {
     @apply invert dark:invert-0;

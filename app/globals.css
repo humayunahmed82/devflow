@@ -1,13 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 @import url("../styles/theme.css");
-
 body {
   font-family: "Inter", sans-serif;
 }
-
 @layer utilities {
   .flex-center {
     @apply flex justify-center items-center;
@@ -48,7 +45,7 @@ body {
     @apply min-h-full dark:bg-dark-400 bg-light-800 text-light-5;
   }
   .no-focus {
-    @apply focus-visible:ring-0 focus-visible:ring-transparent focus;
+    @apply focus-visible:ring-0 focus-visible:ring-transparent focus-visible:ring-offset-0 !important;
   }
 }
 .active-theme {
