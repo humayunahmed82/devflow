@@ -1,8 +1,9 @@
 "use client";
 
+import React, { useRef } from "react";
+import { Editor } from "@tinymce/tinymce-react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import * as z from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +19,8 @@ import { Input } from "@/components/ui/input";
 import { questionSchema } from "@/lib/validations";
 
 const Question = () => {
+  const editorRef = useRef(null);
+
   // 1. Define your form.
   const form = useForm<z.infer<typeof questionSchema>>({
     resolver: zodResolver(questionSchema),
@@ -73,9 +76,41 @@ const Question = () => {
                 <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
-                <Input
-                  className="no-focus paragraph-regular background-light800_dark400 light-border-2 min-h-[56px] border "
-                  {...field}
+                <Editor
+                  apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_APIKEY}
+                  onInit={(evt, editor) => (editorRef.current = editor)}
+                  initialValue=""
+                  init={{
+                    height: 350,
+                    menubar: false,
+                    plugins: [
+                      "advlist",
+                      "autolink",
+                      "lists",
+                      "link",
+                      "image",
+                      "charmap",
+                      "preview",
+                      "anchor",
+                      "searchreplace",
+                      "visualblocks",
+                      "code",
+                      "fullscreen",
+                      "insertdatetime",
+                      "media",
+                      "table",
+                      "code",
+                      "help",
+                      "wordcount",
+                    ],
+                    toolbar:
+                      "undo redo | blocks | " +
+                      "bold italic forecolor | alignleft aligncenter " +
+                      "alignright alignjustify | bullist numlist outdent indent | " +
+                      "removeformat | help",
+                    content_style:
+                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                  }}
                 />
               </FormControl>
               <FormDescription className="body-regular mt-2.5 text-light-500">
@@ -117,3 +152,5 @@ const Question = () => {
 };
 
 export default Question;
+
+// 02_The Question Editor - 4:45
