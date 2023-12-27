@@ -72,12 +72,12 @@ const Question = () => {
           render={({ field }) => (
             <FormItem className="flex w-full flex-col gap-3">
               <FormLabel className="paragraph-semibold text-dark400_light800">
-                Detailed explanation of your problem? *{" "}
+                Detailed explanation of your problem?
                 <span className="text-primary-500">*</span>
               </FormLabel>
               <FormControl className="mt-3.5">
                 <Editor
-                  apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_APIKEY}
+                  apiKey={process.env.NEXT_PUBLIC_TINY_EDITOR_API_KEY}
                   onInit={(evt, editor) => (editorRef.current = editor)}
                   initialValue=""
                   init={{
@@ -94,22 +94,17 @@ const Question = () => {
                       "anchor",
                       "searchreplace",
                       "visualblocks",
-                      "code",
+                      "codesample",
                       "fullscreen",
                       "insertdatetime",
                       "media",
                       "table",
-                      "code",
-                      "help",
-                      "wordcount",
                     ],
                     toolbar:
                       "undo redo | blocks | " +
-                      "bold italic forecolor | alignleft aligncenter " +
-                      "alignright alignjustify | bullist numlist outdent indent | " +
-                      "removeformat | help",
-                    content_style:
-                      "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+                      "codesample | bold italic forecolor | alignleft aligncenter |" +
+                      "alignright alignjustify | bullist numlist ",
+                    content_style: "body { font-family:Inter; font-size:16px }",
                   }}
                 />
               </FormControl>
@@ -152,5 +147,3 @@ const Question = () => {
 };
 
 export default Question;
-
-// 02_The Question Editor - 4:45
