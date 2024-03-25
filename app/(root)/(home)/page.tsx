@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import Filter from "@/components/shared/Filter";
 import HomeFilters from "@/components/home/HomeFilters";
-
 import { HomePageFilters } from "@/constants/filters";
 import NoResult from "@/components/shared/NoResult";
 import QuestionCard from "@/components/card/QuestionCard";
-import { title } from "process";
+
+import { getQuestions } from "@/lib/actions/question.action";
 
 const questions = [
   {
@@ -46,7 +46,9 @@ const questions = [
   },
 ];
 
-const Home = () => {
+const Home = async () => {
+  const result = await getQuestions();
+
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -76,8 +78,8 @@ const Home = () => {
 
       <HomeFilters />
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
@@ -93,7 +95,7 @@ const Home = () => {
         ) : (
           <NoResult
             title="There’s no question to show"
-            discription="Be the first to break the silence! 🚀 Ask a Question and kickstart the
+            description="Be the first to break the silence! 🚀 Ask a Question and kickstart the
           discussion. our query could be the next big thing others learn from. Get
           involved! 💡"
             link="/ask-questions"

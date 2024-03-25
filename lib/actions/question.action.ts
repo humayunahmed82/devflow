@@ -2,9 +2,33 @@
 
 import Question from "@/database/question.model";
 import Tag from "@/database/tag.model";
-import { connectToDatabase } from "../mongoose";
+import User from "@/database/user.model";
 
-export const createQuestion = async (params: any) => {
+import { connectToDatabase } from "../mongoose";
+import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
+import { revalidatePath } from "next/cache";
+
+export const getQuestions = async (params: GetQuestionsParams) => {
+  try {
+    // connect to DB
+    connectToDatabase();
+
+    const questions = await Question.find({})
+      .populate({
+        path: "tags",
+        model: Tag,
+      })
+      .populate({ path: "author", model: User })
+      .sort({ createdAt: -1 });
+
+    return { questions };
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
+
+export const createQuestion = async (params: CreateQuestionParams) => {
   try {
     // connect to DB
     connectToDatabase();
@@ -40,7 +64,6 @@ export const createQuestion = async (params: any) => {
     // Create an interaction record for the user's asked questions action
 
     // Increment author's reputation by +5 for creating a question
+    revalidatePath(path);
   } catch (error) {}
 };
-
-// 02_Create Question Action = 12:50 seconds

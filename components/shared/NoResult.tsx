@@ -2,16 +2,15 @@ import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { Button } from "../ui/button";
-import link from "next/link";
 
 interface notFoundProps {
   title: string;
-  discription: string;
+  description: string;
   link: string;
   linkTitle: string;
 }
 
-const NoResult = ({ title, discription, link, linkTitle }: notFoundProps) => {
+const NoResult = ({ title, description, link, linkTitle }: notFoundProps) => {
   return (
     <div className="mt-10 flex w-full flex-col items-center justify-center">
       <Image
@@ -32,7 +31,7 @@ const NoResult = ({ title, discription, link, linkTitle }: notFoundProps) => {
 
       <h2 className="h2-bold text-dark200_light900 mt-8">{title}</h2>
       <p className="body-regular text-dark500_light700 my-3.5 max-w-md text-center">
-        {discription}
+        {description}
       </p>
 
       <Link href={link}>
