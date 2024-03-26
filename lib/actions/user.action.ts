@@ -5,7 +5,6 @@ import { connectToDatabase } from "../mongoose";
 import {
   CreateUserParams,
   DeleteUserParams,
-  DeleteUserParams,
   UpdateUserParams,
 } from "./shared.types";
 import { revalidatePath } from "next/cache";
@@ -71,9 +70,9 @@ export const deleteUser = async (params: DeleteUserParams) => {
     // and questions, answers, comments, etc.
 
     // get user question ids
-    const userQuestionIds = await QuestionModel.find({
-      author: user._id,
-    }).distinct("_id");
+    // const userQuestionIds = await QuestionModel.find({
+    //   author: user._id,
+    // }).distinct("_id");
 
     // delete user question
     await QuestionModel.deleteMany({ author: userQuestionIds._id });
