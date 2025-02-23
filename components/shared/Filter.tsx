@@ -9,16 +9,16 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-interface filterProps {
+interface FilterProps {
   filters: {
     name: string;
     value: string;
-  };
+  }[];
   otherClasses?: string;
   containerClasses?: string;
 }
 
-const Filter = ({ filters, otherClasses, containerClasses }: filterProps) => {
+const Filter = ({ filters, otherClasses, containerClasses }: FilterProps) => {
   return (
     <div className={`relative ${containerClasses}`}>
       <Select>
