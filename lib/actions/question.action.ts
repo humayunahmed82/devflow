@@ -8,22 +8,36 @@ import { connectToDatabase } from "../mongoose";
 import { CreateQuestionParams, GetQuestionsParams } from "./shared.types";
 import { revalidatePath } from "next/cache";
 
-export const getQuestions = async (params: GetQuestionsParams) => {
+export const getQuestions = async (params: GetQuestionsParams = {}) => {
   try {
-    // connect to DB
-    connectToDatabase();
+    await connectToDatabase();
 
-    const questions = await Question.find({})
-      .populate({
-        path: "tags",
-        model: Tag,
-      })
+    const { page = 1, pageSize = 10, searchQuery, filter } = params;
+    const skip = (page - 1) * pageSize;
+
+    const query: any = {};
+
+    if (searchQuery) {
+      query.$or = [
+        { title: { $regex: searchQuery, $options: "i" } },
+        { content: { $regex: searchQuery, $options: "i" } },
+      ];
+    }
+
+    if (filter) {
+      query.tags = filter;
+    }
+
+    const questions = await Question.find(query)
+      .populate({ path: "tags", model: Tag })
       .populate({ path: "author", model: User })
-      .sort({ createdAt: -1 });
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(pageSize);
 
     return { questions };
   } catch (error) {
-    console.log(error);
+    console.error("Error fetching questions:", error);
     throw error;
   }
 };
