@@ -5,11 +5,11 @@ import React from "react";
 interface MetricProps {
   imgUrl: string;
   alt: string;
-  value: number | number;
+  value: string | number;
   title: string;
   href?: string;
   textStyles?: string;
-  isAuthor?: string;
+  isAuthor?: boolean;
 }
 
 const Metric = ({
