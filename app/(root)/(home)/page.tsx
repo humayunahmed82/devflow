@@ -9,43 +9,6 @@ import QuestionCard from "@/components/card/QuestionCard";
 
 import { getQuestions } from "@/lib/actions/question.action";
 
-const questions = [
-  {
-    _id: 1,
-    title: "cascading deletes in SQLAlchemy?",
-    tags: [
-      { _id: 1, name: "python" },
-      { _id: 2, name: "sql" },
-    ],
-    author: {
-      _id: 1,
-      name: "John Doe",
-      picture: "john-doe.jpg",
-    },
-    upvotes: 1500000,
-    views: 500000,
-    answers: [],
-    createAt: new Date("2023-11-20T12:00:00.000Z"),
-  },
-  {
-    _id: 2,
-    title: "How to center a div?",
-    tags: [
-      { _id: 1, name: "css" },
-      { _id: 2, name: "sql" },
-    ],
-    author: {
-      _id: 2,
-      name: "Humayun",
-      picture: "humayun.jpg",
-    },
-    upvotes: 10,
-    views: 100,
-    answers: [],
-    createAt: new Date("2021-01-19T12:00:00.000Z"),
-  },
-];
-
 const Home = async () => {
   const result = await getQuestions();
 
